@@ -1,0 +1,44 @@
+GET http://localhost:8080/users/
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:1234/users/1
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:1234/users/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Mira Slavna",
+  "age": 31
+}
+
+###
+
+PUT http://127.0.0.1:1234/users/1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "------",
+  "age": 0
+}
+
+###
+
+PATCH http://127.0.0.1:1234/users/1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "age": 1234
+}
+
+###
+
+DELETE http://127.0.0.1:1234/users/6
