@@ -1,13 +1,18 @@
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Table
+from ..mapper import mapper_registry, metadata
 
 
-Base = declarative_base()
+class User:
+    id: int
+    name: str
+    age: int
 
 
-class User(Base):
-    __tablename__ = 'users'
-        
-    id: int = Column(Integer, primary_key=True, autoincrement=True)
-    name: str = Column(String)
-    age: int = Column(Integer)
+user_table = Table(
+    'user', metadata,
+    Column('id', Integer, primary_key=True, autoincrement=True),
+    Column('name', String),
+    Column('age', Integer)
+)
+
+mapper_registry.map_imperatively(User, user_table)

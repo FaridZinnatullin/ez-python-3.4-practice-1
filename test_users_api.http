@@ -1,9 +1,9 @@
-GET http://localhost:8080/users/
+GET http://127.0.0.1:1234/users/
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:1234/users/1
+GET http://127.0.0.1:1234/users/6
 Accept: application/json
 
 ###
@@ -19,24 +19,24 @@ Content-Type: application/json
 
 ###
 
-PUT http://127.0.0.1:1234/users/1
+PUT http://127.0.0.1:1234/users/6
 Accept: application/json
 Content-Type: application/json
 
 {
-  "id": 1,
+  "id": 6,
   "name": "------",
   "age": 0
 }
 
 ###
 
-PATCH http://127.0.0.1:1234/users/1
+PATCH http://127.0.0.1:1234/users/6
 Accept: application/json
 Content-Type: application/json
 
 {
-  "age": 1234
+  "name": "Misha Loki"
 }
 
 ###

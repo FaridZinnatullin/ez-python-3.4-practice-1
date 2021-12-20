@@ -13,13 +13,13 @@ class UserServiceI(ABC):
     def get_user(self, user_id) -> User: pass
 
     @abstractmethod
-    def create_user(self, user: CreateUserDTO) -> User: pass
+    def create_user(self, user: CreateUserDTO) -> int: pass
 
     @abstractmethod
-    def delete_user(self, user_id): pass
+    def delete_user(self, user_id) -> None: pass
 
     @abstractmethod
-    def update_user(self, user: UpdateUserDTO): pass
+    def update_user(self, user: UpdateUserDTO) -> None: pass
 
     @abstractmethod
-    def partially_update(self, user: PartiallyUpdateUserDTO): pass
+    def partially_update(self, user: PartiallyUpdateUserDTO) -> None: pass

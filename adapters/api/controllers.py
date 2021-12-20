@@ -23,9 +23,7 @@ class UserResource:
 
     def on_put(self, req, resp, user_id):
         updated_user = req.media
-        if "id" not in updated_user:
-            updated_user["id"] = user_id
-        dto = UpdateUserDTO(**updated_user)
+        dto = UpdateUserDTO(id=user_id, **updated_user)
         try:
             self.service.update_user(dto)
         except UserNotFoundException as e:
@@ -34,9 +32,7 @@ class UserResource:
 
     def on_patch(self, req, resp, user_id):
         patched_user = req.media
-        if "id" not in patched_user:
-            patched_user["id"] = user_id
-        dto = PartiallyUpdateUserDTO(**patched_user)
+        dto = PartiallyUpdateUserDTO(id=user_id, **patched_user)
         try:
             self.service.partially_update(dto)
         except UserNotFoundException as e:
@@ -59,8 +55,6 @@ class UsersResource:
         limit = req.get_param_as_int('limit') or 50
         offset = req.get_param_as_int('offset') or 0
         users = self.service.get_users(limit=limit, offset=offset)
-        # или сериализация с помощью pydantic/marshmallow
-        # pydantic - быстрее и интерфейс попроще
         schema = UserSchema()
         resp.body = json.dumps(schema.dump(users, many=True))
         resp.status = falcon.HTTP_200
@@ -68,6 +62,6 @@ class UsersResource:
     def on_post(self, req, resp):
         data = req.get_media()
         new_user = CreateUserDTO(**data)
-        user = self.service.create_user(new_user)
+        user_id = self.service.create_user(new_user)
         resp.status = falcon.HTTP_201
-        resp.location = f'/users/{user}'
+        resp.location = f'/users/{user_id}'

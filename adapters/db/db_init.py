@@ -2,14 +2,15 @@ import os
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from domain.user.model import Base
+from domain.mapper import metadata
 
-user = os.getenv('USER', 'postgres')
-password = os.getenv('PASSWORD', 'mypwd')
-host = os.getenv('HOST', 'my-postgres')
+user = os.getenv('USER', 'user')
+password = os.getenv('PASSWORD', 'password')
+host = os.getenv('HOST', 'localhost')
 port = os.getenv('PORT', '5432')
-database = os.getenv('DATABASE', 'postgres')
+database = os.getenv('DATABASE', 'test')
 
 engine = create_engine(f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{database}")
-Base.metadata.create_all(engine)
+
 Session = sessionmaker(engine)
+metadata.create_all(engine)

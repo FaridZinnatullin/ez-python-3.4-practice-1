@@ -1,5 +1,3 @@
-from typing import List
-
 from domain.user.exceptions import UserNotFoundException
 from domain.user.model import User
 from domain.user.storage import UserStorageI
@@ -46,7 +44,7 @@ class UserStorage(UserStorageI):
         
         return user
 
-    def get_all(self, limit: int, offset: int) -> List[User]:
+    def get_all(self, limit: int, offset: int) -> list[User]:
         with Session() as session:
             users = session.query(User).offset(offset).limit(limit).all()
         return users

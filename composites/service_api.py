@@ -18,4 +18,3 @@ def create_app() -> App:
     app.add_route('/users/', users_view)
     app.add_route('/users/{user_id}', user_view)
     return app
-
